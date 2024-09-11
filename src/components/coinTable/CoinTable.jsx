@@ -1,29 +1,19 @@
 import React, { useState } from "react";
 import { fetchCoinData } from "../Services/fetchCoinDate";
 import { useQuery } from "react-query";
-const CoinTable = () => {
+const CoinTable = ({currency}) => {
   /*Inplace of this above useEffect we use this method also to fetch data */
   const [page, setPage] = useState(1);
 
-  /*
-  useQuery()
-  ->This is a react query function
-  ->It takes 3 parameter
-  ->First aruguments pass in the form of array
-      ->> useQuery(["queryName , pagination"])
-  ->second argument is a callback function
-  ->Third argument is configration object
-       ->>Inside configration object we add such type of property like retry:2, it means maximum you can try this 2 times only another peoperty is retryDelay:1000 means after u takes 2 times retry then it take a 1000 second to start the execution again if you again try more than 2 time then again it will not work after 1000 it will start again working another properrty is cacheTime :1000 * 60 * 5 , it means how much time you store the data in cache memory 
-   */
 
   const { data, isLoading, isError, error } = useQuery(
-    ["coins", page],
-    () => fetchCoinData(page, "usd"),
+    ["coins", page , currency],
+    () => fetchCoinData(page, currency),
 
     {
       // retry: 2,
       // retryDelay: 1000,
-      // cacheTime: 1000 * 60 * 2,
+      cacheTime: 1000 * 60 * 2,
       staleTime : 1000 * 60 *2
     }
   );
@@ -36,6 +26,8 @@ const CoinTable = () => {
   }
   console.log("Fetched data in CoinTable component:", data);
   return (
+    <>
+   
     <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
       <div className="w-full bg-yellow-400 text-black p-3 font-semibold flex justify-center items-center ">
         <div className="basis-[35%]">Coin</div>
@@ -89,7 +81,9 @@ const CoinTable = () => {
         </button>
       </div>
     </div>
+    </>
   );
+  
 };
 
 export default CoinTable;

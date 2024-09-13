@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CurrencyContext } from "../context/CurrencyContext";
 
-const Navbar = ({setCurrency}) => {
+const Navbar = () => {
+
+ const {setCurrency} =  useContext(CurrencyContext);
 
   return (
     <>

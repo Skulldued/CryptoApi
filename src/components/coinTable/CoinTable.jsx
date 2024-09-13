@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { fetchCoinData } from "../Services/fetchCoinDate";
 import { useQuery } from "react-query";
-const CoinTable = ({currency}) => {
+import { CurrencyContext } from "../context/CurrencyContext";
+const CoinTable = () => {
+
+  const {currency} = useContext(CurrencyContext);
+
   /*Inplace of this above useEffect we use this method also to fetch data */
   const [page, setPage] = useState(1);
 

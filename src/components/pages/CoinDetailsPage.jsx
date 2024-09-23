@@ -5,6 +5,8 @@ const CoinDetailsPage = () => {
 
   const {coinId} = useParams();
 
+  //TODO , MAKE THE API CALL AND FETCH COIN DATA
+
   return (
     <div>
       coin details page {coinId}

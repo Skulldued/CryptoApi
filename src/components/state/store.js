@@ -10,4 +10,4 @@ const store = create((set)=>({
     })
 }))
 
-export default store;
+export default store; 

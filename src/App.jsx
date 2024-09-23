@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Banner from "./components/Banner/Banner";
 import CoinTable from "./components/coinTable/CoinTable";
 import Home from "./components/pages/Home";
+import Routing from "./components/Routing/Routing";
 // import { CurrencyContext } from "./components/context/CurrencyContext";
 
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
   return (
     <>
     {/* <CurrencyContext.Provider value={{currency,setCurrency}}> */}
-      <Home />
+      <Routing/>
       {/* </CurrencyContext.Provider> */}
     </>
   );

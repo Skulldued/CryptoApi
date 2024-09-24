@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 // import { CurrencyContext } from "../context/CurrencyContext";
 import currencyStore from "../state/store";
 import { useNavigate } from "react-router-dom";
+import MyLoader from "../PageLoader/PageLoader";
 const CoinTable = () => {
   // const {currency} = useContext(CurrencyContext);
   const { currency } = currencyStore();
@@ -32,6 +33,10 @@ const CoinTable = () => {
 
   if (isError) {
     return <div>Error: {error.message}</div>;
+  }
+
+  if(isLoading){
+    return <MyLoader/>
   }
   console.log("Fetched data in CoinTable component:", data);
   return (

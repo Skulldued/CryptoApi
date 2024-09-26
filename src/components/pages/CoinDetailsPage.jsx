@@ -1,23 +1,13 @@
 import React from "react";
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { fetchCoinDetails } from "../Services/fetchCoinDetails";
-import currencyStore from "../state/store";
 import parse from "html-react-parser";
 import MyLoader from "../PageLoader/PageLoader";
 import CoinInfoContainer from "../Coininfo/CoinInfoContainer";
+import useFetchCoin from "../../hooks/useFetchCoin";
 const CoinDetailsPage = () => {
   const { coinId } = useParams();
-  const { currency } = currencyStore();
-
-  const {
-    isError,
-    isLoading,
-    data: coin,
-  } = useQuery(["coin", coinId], () => fetchCoinDetails(coinId), {
-    cacheTime: 1000 * 60 * 2,
-    staleTime: 1000 * 60 * 2,
-  });
+ 
+  const {currency,coin,isError, isLoading} = useFetchCoin(coinId);
 
   if (isLoading) {
     return <MyLoader/>;

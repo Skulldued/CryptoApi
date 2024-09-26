@@ -3,7 +3,8 @@ import Alert from "../Alert/Alert";
 import { Line } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
-import {chartDays} from "../Utils/constants";
+import { chartDays } from "../Utils/constants";
+Chart.register(CategoryScale);
 const Coininfo = ({
   historicData,
   setDays,
@@ -11,20 +12,16 @@ const Coininfo = ({
   days,
   currency,
 }) => {
-
-
-  function handleDayChange(e){
+  function handleDayChange(e) {
     console.log(e.target.options[e.target.selectedIndex].value);
     const daysSelected = e.target.options[e.target.selectedIndex].value;
-    if(daysSelected == 1){
-        setCoinInterval('');
-    }else{
-        setCoinInterval('daily');
+    if (daysSelected == 1) {
+      setCoinInterval?.("");
+    } else {
+      setCoinInterval?.("daily");
     }
-    setDays(e.target.options[e.target.selectedIndex].value);
+    setDays?.(e.target.options[e.target.selectedIndex].value);
   }
-
-  Chart.register(CategoryScale);
 
   if (!historicData) {
     return <Alert message="No data avilable" type="info" />;
@@ -38,16 +35,16 @@ const Coininfo = ({
             labels: historicData.prices.map((coinPrice) => {
               let date = new Date(coinPrice[0]); //CONVERTING UNIX TIMESTAMPS TO DATA
               let time =
-                date.getHours() > 12
-                  ? `${date.getHours() - 12}:${date.getMinutes()} PM`
-                  : `${date.getHours() - 12}:${date.getMinutes()} AM`;
+                date?.getHours() > 12
+                  ? `${date?.getHours() - 12}:${date?.getMinutes()} PM`
+                  : `${date?.getHours() - 12}:${date?.getMinutes()} AM`;
               return days === 1 ? time : date.toLocaleDateString();
             }),
             datasets: [
               {
                 label: `price (past ${days}  ${
                   days === 1 ? "Day" : "Days"
-                } ) in ${currency.toUpperCase()}`,
+                } ) in ${ currency && currency.toUpperCase()}`,
                 data: historicData.prices.map((coinPrice) => coinPrice[1]),
               },
             ],
@@ -65,10 +62,17 @@ const Coininfo = ({
       </div>
 
       <div className="flex justify-center mt-5 w-full">
-        <select className="select select-success w-full max-w-xs" onChange={handleDayChange} >
+        <select
+          className="select select-success w-full max-w-xs"
+          onChange={handleDayChange}
+        >
           {chartDays.map((day, index) => {
             return (
-              <option selected={days == day.value} value={day.value} key={index}>
+              <option
+                selected={days == day.value}
+                value={day.value}
+                key={index}
+              >
                 {day.label}
               </option>
             );

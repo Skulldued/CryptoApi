@@ -48,19 +48,20 @@ const CoinTable = () => {
           <div className="basis-[20%]">24 Change</div>
           <div className="basis-[20%]">Market Cap</div>
         </div>
-        <div className="flex flex-col w-[80vw] mx-auto">
+        <div className="flex flex-col w-[80vw] mx-auto ">
           {isLoading && <div>Loading....</div>}
           {data?.map((coin) => {
             return (
               <div
+              
                 onClick={() => {
                   handleCoinRedirect(coin.id);
                 }}
                 key={coin.id}
-                className="w-full bg-transparent cursor-pointer text-white flex p-3 font-semibold items-center justify-between"
+                className="w-full bg-transparent cursor-pointer text-white flex p-3 font-semibold items-center justify-between hover:bg-slate-700 duration-200"
               >
                 <div className="flex items-center justify-start gap-3 basis-[35%]">
-                  <div className="w-[5rem] h-[5rem]">
+                  <div className="w-[3rem] h-[3rem]">
                     <img src={coin.image} className="w-full h-full" loading="lazy " alt="" />
                   </div>
                   <div className="flex flex-col">
